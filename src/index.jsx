@@ -71,7 +71,10 @@ root.render(
             <Routes>
               <Route path="/" element={<App />}>
                 <Route path="/" element={<Home />} />
-                <Route path="/categories/:categoryId" element={<Category />} />
+                <Route
+                  path="/categories/:categoryId"
+                  element={<CategoryTab />}
+                />
                 <Route path="/admin" element={<AdminHome />} />
                 <Route
                   path="/admin/categories/:categoryId"
