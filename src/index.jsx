@@ -16,7 +16,7 @@ import Home from "./pages/Home";
 import theme from "./styles/theme";
 import SignIn from "./pages/SignIn";
 import NewProduct from "./pages/NewProduct";
-import Category from "./pages/Category";
+import CategoryTab from "./pages/Category";
 import AdminHome from "./pages/AdminHome";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
@@ -75,7 +75,7 @@ root.render(
                 <Route path="/admin" element={<AdminHome />} />
                 <Route
                   path="/admin/categories/:categoryId"
-                  element={<Category />}
+                  element={<CategoryTab />}
                 />
               </Route>
               <Route path="/admin/sign-in" element={<SignIn />} />
