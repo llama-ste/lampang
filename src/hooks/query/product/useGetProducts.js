@@ -20,6 +20,7 @@ const useGetProducts = (sort = "latest", categoryId = null) => {
           return lastPage.data.pagination.next_page;
         return false;
       },
+      cacheTime: 0,
     }
   );
 };
