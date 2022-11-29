@@ -15,7 +15,9 @@ const Layout = ({ children }) => {
       <GridContainer>
         <Header />
         <Main>{children}</Main>
-        {isAdminHome ? <AdminNav /> : <Nav />}
+        <div style={{ gridRow: "1/3", width: "300px" }}>
+          {isAdminHome ? <AdminNav /> : <Nav />}
+        </div>
       </GridContainer>
     </Container>
   );

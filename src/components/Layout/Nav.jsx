@@ -62,9 +62,10 @@ const Nav = () => {
 };
 
 const NavWrapper = styled("nav")(() => ({
-  display: "block",
-  gridRow: "1/3",
+  position: "fixed",
   width: "300px",
+  height: "100%",
+  background: "#fff",
 }));
 
 const StyledListItemButton = styled(ListItemButton)(({ theme }) => ({

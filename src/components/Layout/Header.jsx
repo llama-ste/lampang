@@ -22,13 +22,19 @@ const Header = () => {
 
   return (
     <HeaderWrapper isAdminPage={isAdminPage}>
-      <Title>
-        {params?.categoryId
-          ? categories[params.categoryId]
-          : isAdminPage
-          ? "Lampang Admin🦙"
-          : "Lampang 🦙"}
-      </Title>
+      <TitleBox>
+        <h1>
+          {params?.categoryId
+            ? categories[params.categoryId]
+            : isAdminPage
+            ? "Lampang Admin🦙"
+            : "Lampang 🦙"}
+        </h1>
+        <h2>
+          ※ 쿠팡 파트너스 활동을 통해 일정액의 수수료를 제공받을 수 있습니다.
+        </h2>
+      </TitleBox>
+
       {isAdminPage && (
         <Button
           onClick={logoutHandler}
@@ -50,9 +56,16 @@ const HeaderWrapper = styled("div")(({ isAdminPage }) => ({
   padding: "20px 20px 10px 20px",
 }));
 
-const Title = styled("h1")(() => ({
-  fontSize: "20px",
-  fontWeight: "bold",
+const TitleBox = styled("div")(() => ({
+  h1: {
+    fontSize: "20px",
+    fontWeight: "bold",
+  },
+  h2: {
+    fontSize: "14px",
+    marginTop: "6px",
+    color: "gray",
+  },
 }));
 
 export default Header;
