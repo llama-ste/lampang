@@ -312,10 +312,10 @@ const AdminNav = () => {
   );
 };
 
-const NavWrapper = styled("nav")(() => ({
+const NavWrapper = styled("nav")(({ theme }) => ({
   position: "fixed",
   width: "300px",
-  height: "100%",
+  minHeight: "100vh",
   background: "#fff",
 }));
 
