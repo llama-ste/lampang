@@ -13,7 +13,7 @@ const MobileTabs = () => {
   const { pathname } = useLocation();
   const { data } = useGetCategories();
   const resetSort = useResetRecoilState(sortState);
-  const [selectedCategory, setSelectedCategory] = useState(undefined);
+  const [selectedCategory, setSelectedCategory] = useState(0);
   const isAdminSite = pathname.includes("admin");
 
   useEffect(() => {
@@ -23,10 +23,14 @@ const MobileTabs = () => {
   }, [params]);
 
   return (
-    <MobileTabsBox>
-      <Tabs variant="scrollable" scrollButtons={false} value={selectedCategory}>
-        {data &&
-          [{ id: 0, name: "전체보기" }, ...data].map((category, i) => (
+    data && (
+      <MobileTabsBox>
+        <Tabs
+          variant="scrollable"
+          scrollButtons={false}
+          value={selectedCategory}
+        >
+          {[{ id: 0, name: "전체보기" }, ...data].map((category, i) => (
             <Tab
               key={category.id}
               value={Number(category.id)}
@@ -43,8 +47,9 @@ const MobileTabs = () => {
               }}
             />
           ))}
-      </Tabs>
-    </MobileTabsBox>
+        </Tabs>
+      </MobileTabsBox>
+    )
   );
 };
 

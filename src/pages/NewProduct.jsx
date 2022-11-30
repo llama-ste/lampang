@@ -28,20 +28,35 @@ const NewProduct = () => {
 
   const { handleSubmit, control, reset } = useForm({ mode: "onChange" });
 
-  const submitHandler = async ({ url, description, categoryId }) => {
-    if (url.length > 0) {
+  const submitHandler = async ({
+    coupangUrl,
+    affiliateUrl,
+    productName,
+    description,
+    categoryId,
+  }) => {
+    if (coupangUrl.length > 0) {
       try {
-        const { data } = await getCoupangItem(encodeURIComponent(url));
+        const { data } = await getCoupangItem(encodeURIComponent(coupangUrl));
         setCoupangItem(data);
-        reset((values) => ({ ...values, url: "" }));
+        reset((values) => ({
+          ...values,
+          coupangUrl: "",
+          productName: data.name,
+        }));
       } catch (err) {
-        reset((values) => ({ ...values, url: "" }));
-        toast.error("제품 조회에 실패했습니다.");
+        reset((values) => ({ ...values, coupangUrl: "" }));
+        toast.error("상품 조회에 실패했습니다.");
       }
       return;
     }
 
-    productMutate({ ...coupangItem, category_id: categoryId, description });
+    productMutate({
+      ...coupangItem,
+      category_id: categoryId,
+      description,
+      name: productName,
+    });
   };
 
   return (
@@ -49,13 +64,13 @@ const NewProduct = () => {
       <Container onSubmit={handleSubmit(submitHandler)}>
         {isEmpty ? (
           <>
-            <Title>쿠팡 제품조회</Title>
+            <Title>쿠팡 상품조회</Title>
             <Controller
-              name="url"
+              name="coupangUrl"
               control={control}
               defaultValue=""
               rules={{
-                required: "url을 입력해주세요.",
+                required: "coupang url을 입력해주세요.",
               }}
               render={({ field, fieldState: { error } }) => (
                 <TextField
@@ -78,7 +93,7 @@ const NewProduct = () => {
           </>
         ) : (
           <>
-            <Title>제품등록</Title>
+            <Title>상품등록</Title>
             <ImageListItem>
               <img
                 style={{
@@ -92,13 +107,48 @@ const NewProduct = () => {
               />
               <ImageListItemBar
                 sx={{ width: "350px" }}
-                title={coupangItem.name}
+                title={
+                  <Controller
+                    name="productName"
+                    control={control}
+                    defaultValue=""
+                    rules={{
+                      required: "상품명을 입력해주세요.",
+                    }}
+                    render={({ field, fieldState: { error } }) => (
+                      <TextField
+                        {...field}
+                        sx={{ width: "350px", marginTop: "10px" }}
+                        label="상품명"
+                        error={!!error}
+                        helperText={error ? error.message : null}
+                      />
+                    )}
+                  />
+                }
                 subtitle={`${Number(coupangItem.price).toLocaleString(
                   "ko-KR"
                 )}원`}
                 position="below"
               />
             </ImageListItem>
+            <Controller
+              name="affiliateUrl"
+              control={control}
+              defaultValue=""
+              rules={{
+                required: "affilate url을 입력해주세요.",
+              }}
+              render={({ field, fieldState: { error } }) => (
+                <TextField
+                  {...field}
+                  sx={{ width: "350px" }}
+                  label="Affiliate URL"
+                  error={!!error}
+                  helperText={error ? error.message : null}
+                />
+              )}
+            />
             <Controller
               name="categoryId"
               control={control}
@@ -127,7 +177,7 @@ const NewProduct = () => {
               control={control}
               defaultValue=""
               rules={{
-                required: "제품에 대해 적어주세요.",
+                required: "상품에 대해 적어주세요.",
               }}
               render={({ field, fieldState: { error } }) => (
                 <TextField
