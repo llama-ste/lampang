@@ -5,15 +5,13 @@ import {
   CardMedia,
   Typography,
 } from "@mui/material";
+import styled from "@emotion/styled";
 
 const ProductItem = ({ image, title, price, description, affiliateUrl }) => {
   const priceFormatter = new Intl.NumberFormat(navigator.language);
 
   return (
-    <Card
-      sx={{ minWidth: "230px" }}
-      onClick={() => window.open(affiliateUrl, "_blank")}
-    >
+    <CustomCard onClick={() => window.open(affiliateUrl, "_blank")}>
       <CardActionArea
         sx={{
           display: "flex",
@@ -22,8 +20,7 @@ const ProductItem = ({ image, title, price, description, affiliateUrl }) => {
           height: "100%",
         }}
       >
-        <CardMedia
-          sx={{ objectFit: "contain", padding: "1px", minWidth: "260px" }}
+        <CustomCardMedia
           component="img"
           height="200"
           image={image}
@@ -45,8 +42,25 @@ const ProductItem = ({ image, title, price, description, affiliateUrl }) => {
           <Typography variant="body2">{description}</Typography>
         </CardContent>
       </CardActionArea>
-    </Card>
+    </CustomCard>
   );
 };
+
+const CustomCard = styled(Card)(({ theme }) => ({
+  width: "100%",
+  [theme.breakpoints.up("md")]: {
+    minWidth: "230px",
+  },
+}));
+
+const CustomCardMedia = styled(CardMedia)(({ theme }) => ({
+  objectFit: "contain",
+  padding: "1px",
+  minWidth: "260px",
+  [theme.breakpoints.down("sm")]: {
+    minWidth: "150px",
+    width: "100%",
+  },
+}));
 
 export default ProductItem;

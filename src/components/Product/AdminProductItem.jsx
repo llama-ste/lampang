@@ -8,6 +8,7 @@ import {
   Typography,
   TextField,
 } from "@mui/material";
+import styled from "@emotion/styled";
 import { useState } from "react";
 
 import usePutProduct from "../../hooks/mutation/product/usePutProduct";
@@ -29,17 +30,9 @@ const AdminProductItem = ({
   const { mutate: deleteMutate } = useDeleteProduct();
 
   return (
-    <Card
-      sx={{
-        minWidth: "230px",
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "space-between",
-      }}
-    >
+    <CustomCard>
       <CardActionArea onClick={() => window.open(affiliateUrl, "_blank")}>
-        <CardMedia
-          sx={{ objectFit: "contain", padding: "1px", minWidth: "260px" }}
+        <CustomCardMedia
           component="img"
           height="200"
           image={image}
@@ -118,8 +111,28 @@ const AdminProductItem = ({
           </>
         )}
       </CardActions>
-    </Card>
+    </CustomCard>
   );
 };
+
+const CustomCard = styled(Card)(({ theme }) => ({
+  display: "flex",
+  flexDirection: "column",
+  justifyContent: "space-between",
+  width: "100%",
+  [theme.breakpoints.up("md")]: {
+    minWidth: "230px",
+  },
+}));
+
+const CustomCardMedia = styled(CardMedia)(({ theme }) => ({
+  objectFit: "contain",
+  padding: "1px",
+  minWidth: "260px",
+  [theme.breakpoints.down("sm")]: {
+    minWidth: "150px",
+    width: "100%",
+  },
+}));
 
 export default AdminProductItem;

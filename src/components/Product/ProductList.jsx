@@ -1,4 +1,13 @@
-import { Button, styled, ToggleButton, ToggleButtonGroup } from "@mui/material";
+import {
+  Button,
+  FormControl,
+  InputLabel,
+  MenuItem,
+  Select,
+  styled,
+  ToggleButton,
+  ToggleButtonGroup,
+} from "@mui/material";
 import { useRef } from "react";
 import { useParams, useNavigate, useLocation } from "react-router-dom";
 import { useRecoilState } from "recoil";
@@ -16,8 +25,8 @@ const ProductList = () => {
   const navigate = useNavigate();
   const params = useParams();
   const [sort, setSort] = useRecoilState(sortState);
-  const sortChange = (_, newValue) => {
-    setSort(newValue);
+  const sortChange = (e) => {
+    setSort(e.target.value);
   };
   const scrollObserver = useRef(null);
   const { data, hasNextPage, fetchNextPage, isLoading, isFetching } =
@@ -38,23 +47,23 @@ const ProductList = () => {
       <>
         <LoadingBar isLoading={isLoading || isFetching} />
         <ButtonWrapper>
-          <ToggleButtonGroup
-            sx={{ maxWidth: "300px", height: "40px" }}
-            fullWidth
-            exclusive
-            color="primary"
-            value={sort}
-            onChange={sortChange}
+          <FormControl
+            size="small"
+            sx={{ marginBottom: "20px", width: "120px" }}
           >
-            <ToggleButton value="latest">최신순</ToggleButton>
-            <ToggleButton value="highest_price">높은가격순</ToggleButton>
-            <ToggleButton value="lowest_price">낮은가격순</ToggleButton>
-          </ToggleButtonGroup>
+            <InputLabel>정렬</InputLabel>
+            <Select value={sort} onChange={sortChange} label="정렬">
+              <MenuItem value="latest">최신순</MenuItem>
+              <MenuItem value="highest_price">높은가격순</MenuItem>
+              <MenuItem value="lowest_price">낮은가격순</MenuItem>
+            </Select>
+          </FormControl>
           {isAdminPage && (
             <Button
               onClick={() => navigate("/admin/new-product")}
-              sx={{ fontWeight: 600 }}
+              sx={{ fontWeight: 600, height: "40px" }}
               variant="contained"
+              size="small"
             >
               상품추가
             </Button>
@@ -90,19 +99,39 @@ const ProductList = () => {
   );
 };
 
-const Container = styled("div")(() => ({
+const Container = styled("div")(({ theme }) => ({
   display: "grid",
-  gridTemplateColumns: "repeat(3, 1fr)",
+  gridTemplateColumns: "repeat(2, 1fr)",
   gridTemplateRows: "auto",
-  gap: "20px",
-  overflow: "scroll",
+  gap: "10px",
   padding: "1px",
+  [theme.breakpoints.up("md")]: {
+    gridTemplateColumns: "repeat(3, 1fr)",
+    gap: "15px",
+  },
 }));
-
 const ButtonWrapper = styled("div")(() => ({
   display: "flex",
+  justifyContent: "flex-end",
   width: "100%",
-  justifyContent: "space-between",
+  gap: "10px",
 }));
 
 export default ProductList;
+
+// const sortChange = (_, newValue) => {
+//   setSort(newValue);
+// };
+
+//  <ToggleButtonGroup
+//       sx={{ maxWidth: "300px", height: "40px" }}
+//       fullWidth
+//       exclusive
+//       color="primary"
+//       value={sort}
+//       onChange={sortChange}
+//     >
+//       <ToggleButton value="latest">최신순</ToggleButton>
+//       <ToggleButton value="highest_price">높은가격순</ToggleButton>
+//       <ToggleButton value="lowest_price">낮은가격순</ToggleButton>
+//  </ToggleButtonGroup>
