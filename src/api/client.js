@@ -12,10 +12,12 @@ client.defaults.headers = {
 client.interceptors.response.use(
   (res) => res,
   (err) => {
-    if (err.response.status === 401) {
+    if (err.response.data.error_code === 40101) {
       deleteCookie("token");
       deleteCookie("refreshToken");
       deleteCookie("username");
+      alert("로그인을 다시 해주세요.");
+      window.location.href = "https://lampang.vercel.app/admin/sign-in";
     }
   }
 );

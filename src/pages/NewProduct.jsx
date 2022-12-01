@@ -54,6 +54,7 @@ const NewProduct = () => {
     productMutate({
       ...coupangItem,
       category_id: categoryId,
+      affiliate_url: affiliateUrl,
       description,
       name: productName,
     });
@@ -101,6 +102,7 @@ const NewProduct = () => {
                   width: "350px",
                   height: "200px",
                   marginBottom: "10px",
+                  borderRadius: "4px",
                 }}
                 src={coupangItem.image_url}
                 alt="itemImage"
