@@ -16,7 +16,7 @@
 <br/>
 
 ## Tech Stack
-<b>Frontend</b> : React, Recoil, React-query, React-beautiful-dnd, Mui <br/>
+<b>Frontend(My Role)</b> : React, Recoil, React-query, React-beautiful-dnd, Mui <br/>
 <b>Backend</b> : RubyOnRails, PostgreSQL, Nokogiri <br/>
 <b>Infrastructure</b> : Vercel, Railway
 
@@ -100,7 +100,8 @@ React-beautiful-dnd를 이용하여 Draggable List를 구현하였는데, React1
 <b>해결</b><br/>
 해당 문제는 React StrictMode를 제거하면 쉽게 해결 되긴하지만 올바른 방법같지는 않아서 다른방법을 찾아보았다.<br/>
 검색해본 결과 requestAnimationFrame(() => {})이라는 리페인트 과정이 끝난후 콜백이 실행되는 WebAPI를 찾아볼수 있었다.<br/>
-이것을 이용하여 componentDidMount이후에 droppable을 보여지게 만들어 정상동작 되었다.
+이것을 이용하여 componentDidMount이후에 droppable을 보여지게 만들어 정상동작 되었다.<br/>
+<b>Link : [Library Issue](https://github.com/atlassian/react-beautiful-dnd/issues/2399)</b>
 
 
 <details>
