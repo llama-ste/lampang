@@ -11,7 +11,7 @@ const AdminHome = () => {
 
   useEffect(() => {
     if (!hasToken) {
-      toast.error("로그인 먼저 해주세요.");
+      toast.error("로그인을 먼저 해주세요.");
       navigate("/admin/sign-in", { replace: true });
     }
   }, [hasToken, navigate]);
