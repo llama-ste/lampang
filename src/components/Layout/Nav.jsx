@@ -31,7 +31,7 @@ const Nav = () => {
         </StyledTypography>
       </Toolbar>
       <List>
-        <Typography
+        {/* <Typography
           sx={{
             fontWeight: "bold",
             fontSize: "24px",
@@ -39,7 +39,7 @@ const Nav = () => {
           }}
         >
           카테고리
-        </Typography>
+        </Typography> */}
         {data &&
           data.map((category, i) => (
             <StyledListItemButton

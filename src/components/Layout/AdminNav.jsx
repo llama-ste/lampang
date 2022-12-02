@@ -15,7 +15,7 @@ import {
   TextField,
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
-import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
+import { DragDropContext, Draggable } from "react-beautiful-dnd";
 import { useState } from "react";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
@@ -30,6 +30,7 @@ import usePutReorderCategories from "../../hooks/mutation/category/usePutReorder
 import usePutCategory from "../../hooks/mutation/category/usePutCategory";
 import useDeleteCategory from "../../hooks/mutation/category/useDeleteCategory";
 import usePostCategory from "../../hooks/mutation/category/usePostCategory";
+import StrictModeDroppable from "../Admin/StrictModeDroppable";
 
 const AdminNav = () => {
   const navigate = useNavigate();
@@ -83,7 +84,7 @@ const AdminNav = () => {
       </Toolbar>
       {!isLoading && (
         <List>
-          <Typography
+          {/* <Typography
             sx={{
               fontWeight: "bold",
               fontSize: "24px",
@@ -91,7 +92,7 @@ const AdminNav = () => {
             }}
           >
             카테고리
-          </Typography>
+          </Typography> */}
           {!editMode.onEditMode ? (
             data.map((category) => (
               <StyledListItemButton
@@ -110,7 +111,7 @@ const AdminNav = () => {
             ))
           ) : editMode.isReorder ? (
             <DragDropContext onDragEnd={handleChange}>
-              <Droppable droppableId="categories">
+              <StrictModeDroppable droppableId="categories">
                 {(provided) => (
                   <div
                     className="categories"
@@ -150,7 +151,7 @@ const AdminNav = () => {
                     {provided.placeholder}
                   </div>
                 )}
-              </Droppable>
+              </StrictModeDroppable>
             </DragDropContext>
           ) : (
             adminCategories.map((category, i) =>

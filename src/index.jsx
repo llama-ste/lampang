@@ -60,33 +60,35 @@ const toastConfig = {
 const queryClient = new QueryClient(options);
 
 root.render(
-  <CookiesProvider>
-    <QueryClientProvider client={queryClient}>
-      <ThemeProvider theme={theme}>
-        <RecoilRoot>
-          <Reset />
-          <CssBaseline />
-          <ToastContainer {...toastConfig} />
-          <Router>
-            <Routes>
-              <Route path="/" element={<App />}>
-                <Route path="/" element={<Home />} />
-                <Route
-                  path="/categories/:categoryId"
-                  element={<CategoryTab />}
-                />
-                <Route path="/admin" element={<AdminHome />} />
-                <Route
-                  path="/admin/categories/:categoryId"
-                  element={<CategoryTab />}
-                />
-              </Route>
-              <Route path="/admin/sign-in" element={<SignIn />} />
-              <Route path="/admin/new-product" element={<NewProduct />} />
-            </Routes>
-          </Router>
-        </RecoilRoot>
-      </ThemeProvider>
-    </QueryClientProvider>
-  </CookiesProvider>
+  <React.StrictMode>
+    <CookiesProvider>
+      <QueryClientProvider client={queryClient}>
+        <ThemeProvider theme={theme}>
+          <RecoilRoot>
+            <Reset />
+            <CssBaseline />
+            <ToastContainer {...toastConfig} />
+            <Router>
+              <Routes>
+                <Route path="/" element={<App />}>
+                  <Route path="/" element={<Home />} />
+                  <Route
+                    path="/categories/:categoryId"
+                    element={<CategoryTab />}
+                  />
+                  <Route path="/admin" element={<AdminHome />} />
+                  <Route
+                    path="/admin/categories/:categoryId"
+                    element={<CategoryTab />}
+                  />
+                </Route>
+                <Route path="/admin/sign-in" element={<SignIn />} />
+                <Route path="/admin/new-product" element={<NewProduct />} />
+              </Routes>
+            </Router>
+          </RecoilRoot>
+        </ThemeProvider>
+      </QueryClientProvider>
+    </CookiesProvider>
+  </React.StrictMode>
 );
