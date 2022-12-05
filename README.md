@@ -1,8 +1,8 @@
 # [Lampang](https://llamaste.site)
 <b>람팡은 쿠팡 파트너스* 기반의 어필리에이트 웹서비스 입니다.</b><br/>
-<b>※ 유저가 람팡을 통해 쿠팡의 상품을 구매하면 람팡은 상품 금액의 약 3~10%의 수수료를 정산 받을 수 있습니다.</b>
+<b>※ 유저가 람팡을 통해 쿠팡의 상품을 구매하면 람팡은 상품 금액의 약 3~10%의 수수료를 정산 받을 수 있어요.</b>
 
-*쿠팡 파트너스 : 쿠팡에서 운영하는 온라인 제휴마케팅 서비스이며 홈페이지, 블로그, SNS 등을 사용하는 사람이라면 누구나 이용할 수 있습니다. 쿠팡에서 판매되는 상품을 자신의 페이지에 노출하여 구매가 발생하면 광고비를 지급받을 수 있습니다.
+*쿠팡 파트너스 : 쿠팡에서 운영하는 온라인 제휴마케팅 서비스이며 홈페이지, 블로그, SNS 등을 사용하는 사람이라면 누구나 이용할 수 있어요. 쿠팡에서 판매되는 상품을 자신의 페이지에 노출하여 구매가 발생하면 광고비를 지급받을 수 있어요.
 
 <p align="center">
 <img src="https://user-images.githubusercontent.com/90495580/205214487-7b5db9c2-4c69-46ad-9248-d70c6dfeb42c.png" />
@@ -92,16 +92,16 @@ export default useIntersectionObserver;
 
 ### Draggable List
 <b>문제</b><br/>
-React-beautiful-dnd를 이용하여 Draggable List를 구현하였는데, React18에서 애니메이션이 동작하지 않는 문제가 발생했다.<br/>
+React-beautiful-dnd를 이용하여 Draggable List를 구현하였는데, React18버전에서 애니메이션이 동작하지 않는 문제가 발생했다.<br/>
 
 <b>원인</b><br/>
 원인은 해당 라이브러리는 useLayoutEffect내부에서 droppable이 등록되는데 첫 componentDidMount에서는 실행되지만 컴포넌트가 다시 마운트될때는 실행되지 않아서 발생하는 문제였다.<br/>
 
 <b>해결</b><br/>
 해당 문제는 React StrictMode를 제거하면 쉽게 해결 되긴하지만 올바른 방법같지는 않아서 다른방법을 찾아보았다.<br/>
-검색해본 결과 requestAnimationFrame(() => {})이라는 리페인트 과정이 끝난후 콜백이 실행되는 WebAPI를 찾아볼수 있었다.<br/>
-이것을 이용하여 componentDidMount이후에 droppable을 보여지게 만들어 정상동작 되었다.<br/>
-<b>Link : [Library Issue](https://github.com/atlassian/react-beautiful-dnd/issues/2399)</b>
+검색해본 결과 <b>[requestAnimationFrame](https://developer.mozilla.org/ko/docs/Web/API/Window/requestAnimationFrame)</b>라는 WebAPI를 찾아볼수 있었다.<br/>
+requestAnimationFrame는 다음 리페인트 과정이 시작되기전 원하는 애니메이트를 만들어줄 콜백이 실행되는 API인데, 이 문제에 이용한 결과 정상동작 하였다.<br/>
+<b>Link : [Github Issue](https://github.com/atlassian/react-beautiful-dnd/issues/2399)</b>
 
 
 <details>
@@ -150,11 +150,11 @@ export default StrictModeDroppable;
 <br/>
 
 ### 쿠팡 API 연동
-<b>HMAC</b> : 해시 메시지 인증코드(Hash Message Authentication Code)의 준말로써 RFC2104 표준 암호화 프로토콜입니다. 파트너스 API는 HMAC기반으로 제작되었으며 모든 request header의 Authorization에 생성한 HMAC signature를 함께 보내야합니다.<br>
-
 <p align="center">
 <img src="https://user-images.githubusercontent.com/90495580/205235323-8de4e946-fd62-4af5-a049-2479e7b6f6af.png" />
 </p>
+
+<b>HMAC</b> : 해시 메시지 인증코드(Hash Message Authentication Code)의 준말로써 RFC2104 표준 암호화 프로토콜이다. 파트너스 API는 HMAC기반으로 제작되었으며 모든 request header의 Authorization에 생성한 HMAC signature를 함께 보내야한다.<br>
 
 <br/>
 
