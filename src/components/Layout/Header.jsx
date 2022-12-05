@@ -5,6 +5,8 @@ import { useParams, useLocation, useNavigate } from "react-router-dom";
 
 import { deleteCookie } from "../../common/cookie";
 import { categoriesState } from "../../state/categories";
+import subLogo1 from "../../assets/subLogo1.svg";
+import subLogo2 from "../../assets/subLogo2.svg";
 
 const Header = () => {
   const params = useParams();
@@ -24,13 +26,20 @@ const Header = () => {
     <HeaderContainer>
       <HeaderWrapper isAdminPage={isAdminPage}>
         <TitleBox>
-          <h1>
-            {params?.categoryId
-              ? categories[params.categoryId]
-              : isAdminPage
-              ? "Lampang Admin🦙"
-              : "Lampang 🦙"}
-          </h1>
+          <div style={{ display: "flex", alignItems: "center" }}>
+            <h1>
+              {params?.categoryId
+                ? `${categories[params.categoryId]}  `
+                : isAdminPage
+                ? "Lampang Admin  "
+                : "Lampang  "}
+            </h1>
+            {params?.categoryId ? (
+              <img src={subLogo2} alt="logo" style={{ width: "24px" }} />
+            ) : (
+              <img src={subLogo1} alt="logo" style={{ width: "24px" }} />
+            )}
+          </div>
           <h2>
             ※ 쿠팡 파트너스 활동을 통해 일정액의 수수료를 제공받을 수 있습니다.
           </h2>
@@ -75,8 +84,10 @@ const HeaderWrapper = styled("div")(({ isAdminPage, theme }) => ({
 
 const TitleBox = styled("div")(() => ({
   h1: {
-    fontSize: "20px",
+    fontSize: "24px",
     fontWeight: "bold",
+    paddingTop: "4px",
+    marginRight: "5px",
   },
   h2: {
     fontSize: "14px",

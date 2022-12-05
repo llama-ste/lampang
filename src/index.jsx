@@ -18,6 +18,7 @@ import SignIn from "./pages/SignIn";
 import NewProduct from "./pages/NewProduct";
 import CategoryTab from "./pages/Category";
 import AdminHome from "./pages/AdminHome";
+import NotFound from "./pages/NotFound";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
@@ -84,6 +85,7 @@ root.render(
                 </Route>
                 <Route path="/admin/sign-in" element={<SignIn />} />
                 <Route path="/admin/new-product" element={<NewProduct />} />
+                <Route path="*" element={<NotFound />} />
               </Routes>
             </Router>
           </RecoilRoot>

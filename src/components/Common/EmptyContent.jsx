@@ -1,12 +1,19 @@
-import CloudOffIcon from "@mui/icons-material/CloudOff";
 import styled from "@emotion/styled";
 import { Typography } from "@mui/material";
+import notFound from "../../assets/notFound.svg";
 
 const EmptyContent = () => {
   return (
     <Container>
-      <CloudOffIcon fontSize="large" sx={{ width: "50px", height: "50px" }} />
-      <Typography sx={{ fontWeight: 600 }}>데이터가 없습니다.</Typography>
+      <img
+        className="notFound"
+        src={notFound}
+        style={{ maxWidth: "200px" }}
+        alt="notFound"
+      />
+      <Typography sx={{ fontWeight: "bold", fontSize: "24px" }}>
+        데이터가 없습니다.
+      </Typography>
     </Container>
   );
 };

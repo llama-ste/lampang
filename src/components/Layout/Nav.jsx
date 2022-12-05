@@ -11,6 +11,7 @@ import {
 
 import { sortState } from "../../state/sort";
 import useGetCategories from "../../hooks/query/category/useGetCategories";
+import mainLogo from "../../assets/mainLogo.svg";
 
 const Nav = () => {
   const navigate = useNavigate();
@@ -27,19 +28,15 @@ const Nav = () => {
             navigate("/");
           }}
         >
+          <img
+            src={mainLogo}
+            alt="logo"
+            style={{ width: "50px", marginRight: "5px" }}
+          />
           Lampang
         </StyledTypography>
       </Toolbar>
       <List>
-        {/* <Typography
-          sx={{
-            fontWeight: "bold",
-            fontSize: "24px",
-            margin: "0px 0px 5px 24px",
-          }}
-        >
-          카테고리
-        </Typography> */}
         {data &&
           data.map((category, i) => (
             <StyledListItemButton
