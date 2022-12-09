@@ -20,17 +20,11 @@ const ProductItem = ({ image, title, price, description, affiliateUrl }) => {
           height: "100%",
         }}
       >
-        <CustomCardMedia
-          component="img"
-          height="200"
-          image={image}
-          alt="상품사진"
-        />
+        <CustomCardMedia component="img" image={image} alt="상품사진" />
         <CardContent>
           <Typography sx={{ fontWeight: "bold" }}>{title}</Typography>
           <Typography
             sx={{
-              textAlign: "end",
               margin: "10px 0px",
               color: "#000000CC",
               fontWeight: 600,
@@ -46,7 +40,7 @@ const ProductItem = ({ image, title, price, description, affiliateUrl }) => {
   );
 };
 
-const CustomCard = styled(Card)(({ theme }) => ({
+const CustomCard = styled("div")(({ theme }) => ({
   width: "100%",
   [theme.breakpoints.up("md")]: {
     minWidth: "230px",
@@ -56,10 +50,9 @@ const CustomCard = styled(Card)(({ theme }) => ({
 const CustomCardMedia = styled(CardMedia)(({ theme }) => ({
   objectFit: "contain",
   padding: "1px",
-  minWidth: "260px",
+  width: "100%",
   [theme.breakpoints.down("sm")]: {
     minWidth: "150px",
-    width: "100%",
   },
 }));
 
