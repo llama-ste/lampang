@@ -161,4 +161,4 @@ export default StrictModeDroppable;
 ## 📌한 줄 회고 (feat.작고 귀여운 나의 수익)
 > 조그마한 수익이라도 낼 수 있는 프로젝트를 만들어보니 개발이 점점 더 흥미롭게 다가오는것 같다.
 
-<img src="https://user-images.githubusercontent.com/90495580/205828667-c19aae7c-69b3-4860-8e7f-3db5ba513080.png" />
+<img src="https://velog.velcdn.com/images/llama/post/0fc89b10-769f-4fd7-9975-8d75836c2983/image.png" />
