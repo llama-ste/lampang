@@ -21,7 +21,6 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import CheckIcon from "@mui/icons-material/Check";
 import ReplayIcon from "@mui/icons-material/Replay";
-import { toast } from "react-toastify";
 
 import { sortState } from "../../state/sort";
 import { adminCategoriesState } from "../../state/categories";
@@ -30,7 +29,8 @@ import usePatchReorderCategories from "../../hooks/mutation/category/usePatchReo
 import usePatchCategory from "../../hooks/mutation/category/usePatchCategory";
 import useDeleteCategory from "../../hooks/mutation/category/useDeleteCategory";
 import usePostCategory from "../../hooks/mutation/category/usePostCategory";
-import StrictModeDroppable from "../Admin/StrictModeDroppable";
+import StrictModeDroppable from "../Common/StrictModeDroppable";
+import useToastMessage from "../../hooks/common/useToastMessage";
 
 const AdminNav = () => {
   const navigate = useNavigate();
@@ -50,6 +50,7 @@ const AdminNav = () => {
   const { mutate: categortPatchMutate } = usePatchCategory();
   const { mutate: deleteMutate } = useDeleteCategory();
   const { mutate: postMutate } = usePostCategory();
+  const showToast = useToastMessage();
   const isNotEditing = !editMode.isReorder && !editMode.isEdit;
 
   const handleChange = (result) => {
@@ -267,7 +268,7 @@ const AdminNav = () => {
                 <StyledButton
                   onClick={() => {
                     if (newCategory.length === 0) {
-                      toast.warning("빈값은 추가할 수 없습니다.");
+                      showToast("warning", "빈값은 추가할 수 없습니다.");
                       return;
                     }
                     postMutate({ name: newCategory });

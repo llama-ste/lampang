@@ -1,12 +1,14 @@
 import { useMutation } from "@tanstack/react-query";
-import { toast } from "react-toastify";
 
 import { postSignIn } from "../../../api/admin";
 import { setCookie } from "../../../common/cookie";
+import useToastMessage from "../../common/useToastMessage";
 
 const usePostSignIn = (navigate) => {
+  const showToast = useToastMessage();
+
   return useMutation((data) => postSignIn(data), {
-    onError: () => toast.error("로그인에 실패했습니다."),
+    onError: () => showToast("error", "로그인에 실패했습니다."),
     onSuccess: (data) => {
       const {
         data: { token, name },

@@ -38,7 +38,7 @@ const Nav = () => {
       </Toolbar>
       <List>
         {data &&
-          data.map((category, i) => (
+          data.map((category) => (
             <StyledListItemButton
               key={category.id}
               onClick={() => {

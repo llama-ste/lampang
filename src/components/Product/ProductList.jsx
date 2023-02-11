@@ -1,5 +1,4 @@
 import {
-  Button,
   FormControl,
   InputLabel,
   MenuItem,
@@ -7,7 +6,7 @@ import {
   styled,
 } from "@mui/material";
 import { useRef } from "react";
-import { useParams, useNavigate, useLocation } from "react-router-dom";
+import { useParams, useLocation } from "react-router-dom";
 import { useRecoilState } from "recoil";
 
 import useIntersectionObserver from "../../hooks/common/useIntersectionObserver";
@@ -20,7 +19,6 @@ import AdminProductItem from "./AdminProductItem";
 
 const ProductList = () => {
   const { pathname } = useLocation();
-  const navigate = useNavigate();
   const params = useParams();
   const [sort, setSort] = useRecoilState(sortState);
   const sortChange = (e) => {
@@ -41,49 +39,44 @@ const ProductList = () => {
   if (!isLoading && products?.length === 0) return <EmptyContent />;
 
   return (
-    products?.length > 0 && (
-      <>
-        <LoadingBar isLoading={isLoading || isFetching} />
-        <ButtonWrapper>
-          <FormControl
-            size="small"
-            sx={{ marginBottom: "20px", width: "120px" }}
-          >
-            <InputLabel>정렬</InputLabel>
-            <Select value={sort} onChange={sortChange} label="정렬">
-              <MenuItem value="idDesc">최신순</MenuItem>
-              <MenuItem value="highestPrice">높은가격순</MenuItem>
-              <MenuItem value="lowestPrice">낮은가격순</MenuItem>
-            </Select>
-          </FormControl>
-        </ButtonWrapper>
-        <Container>
-          {products.map((product) =>
-            isAdminPage ? (
-              <AdminProductItem
-                affiliateUrl={product.affiliateUrl}
-                key={product.id}
-                image={product.imageUrl}
-                title={product.name}
-                price={product.price}
-                description={product.description}
-                productId={product.id}
-              />
-            ) : (
-              <ProductItem
-                affiliateUrl={product.affiliateUrl}
-                key={product.id}
-                image={product.imageUrl}
-                title={product.name}
-                price={product.price}
-                description={product.description}
-              />
-            )
-          )}
-        </Container>
-        <div ref={scrollObserver} />
-      </>
-    )
+    <>
+      <LoadingBar isLoading={isLoading || isFetching} />
+      <ButtonWrapper>
+        <FormControl size="small" sx={{ marginBottom: "20px", width: "120px" }}>
+          <InputLabel>정렬</InputLabel>
+          <Select value={sort} onChange={sortChange} label="정렬">
+            <MenuItem value="idDesc">최신순</MenuItem>
+            <MenuItem value="highestPrice">높은가격순</MenuItem>
+            <MenuItem value="lowestPrice">낮은가격순</MenuItem>
+          </Select>
+        </FormControl>
+      </ButtonWrapper>
+      <Container>
+        {products?.map((product) =>
+          isAdminPage ? (
+            <AdminProductItem
+              affiliateUrl={product.affiliateUrl}
+              key={product.id}
+              image={product.imageUrl}
+              title={product.name}
+              price={product.price}
+              description={product.description}
+              productId={product.id}
+            />
+          ) : (
+            <ProductItem
+              affiliateUrl={product.affiliateUrl}
+              key={product.id}
+              image={product.imageUrl}
+              title={product.name}
+              price={product.price}
+              description={product.description}
+            />
+          )
+        )}
+      </Container>
+      <div ref={scrollObserver} />
+    </>
   );
 };
 
@@ -93,7 +86,9 @@ const Container = styled("div")(({ theme }) => ({
   gridTemplateRows: "auto",
   gap: "10px",
   padding: "1px",
-  [theme.breakpoints.up("md")]: {
+  width: "100%",
+  minHeight: "100vh",
+  [theme.breakpoints.up("sm")]: {
     gridTemplateColumns: "repeat(3, 1fr)",
     gap: "15px",
   },

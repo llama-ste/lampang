@@ -1,19 +1,18 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { toast } from "react-toastify";
 
 import { patchProduct } from "../../../api/product";
+import useToastMessage from "../../common/useToastMessage";
 
 const usePatchProduct = (offEditHandler) => {
   const queryClient = useQueryClient();
+  const showToast = useToastMessage();
 
   return useMutation((params) => patchProduct(params), {
-    onError: () => toast.error("수정에 실패했습니다."),
+    onError: () => showToast("error", "수정에 실패했습니다."),
     onSuccess: async () => {
       await queryClient.invalidateQueries(["useGetProducts"]);
       offEditHandler();
-      toast.dismiss();
-      toast.clearWaitingQueue();
-      toast.success("수정되었습니다.");
+      showToast("success", "수정되었습니다.");
     },
   });
 };

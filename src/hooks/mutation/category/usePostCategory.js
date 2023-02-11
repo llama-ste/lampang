@@ -1,18 +1,17 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { toast } from "react-toastify";
 
 import { postCategory } from "../../../api/category";
+import useToastMessage from "../../common/useToastMessage";
 
 const usePostCategory = () => {
   const queryClient = useQueryClient();
+  const showToast = useToastMessage();
 
   return useMutation((data) => postCategory(data), {
-    onError: (err) => toast.error("추가에 실패했습니다."),
+    onError: (err) => showToast("error", "추가에 실패했습니다."),
     onSuccess: async () => {
       await queryClient.invalidateQueries(["useGetCategories"]);
-      toast.dismiss();
-      toast.clearWaitingQueue();
-      toast.success("추가되었습니다.");
+      showToast("success", "추가되었습니다.");
     },
   });
 };

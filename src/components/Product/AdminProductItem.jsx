@@ -128,7 +128,6 @@ const CustomCard = styled(Card)(({ theme }) => ({
 const CustomCardMedia = styled(CardMedia)(({ theme }) => ({
   objectFit: "contain",
   padding: "1px",
-  minWidth: "260px",
   [theme.breakpoints.down("sm")]: {
     minWidth: "150px",
     width: "100%",

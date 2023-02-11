@@ -18,7 +18,6 @@ const MobileTabs = () => {
 
   useEffect(() => {
     const categoryId = params?.categoryId ? Number(params.categoryId) : 0;
-
     setSelectedCategory(categoryId);
   }, [params]);
 
@@ -30,7 +29,7 @@ const MobileTabs = () => {
           scrollButtons={false}
           value={selectedCategory}
         >
-          {[{ id: 0, name: "전체보기" }, ...data].map((category, i) => (
+          {[{ id: 0, name: "전체보기" }, ...data].map((category) => (
             <Tab
               key={category.id}
               value={Number(category.id)}

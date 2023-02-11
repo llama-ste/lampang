@@ -16,8 +16,7 @@ import Home from "./pages/Home";
 import theme from "./styles/theme";
 import SignIn from "./pages/SignIn";
 import NewProduct from "./pages/NewProduct";
-import CategoryTab from "./pages/Category";
-import AdminHome from "./pages/AdminHome";
+import Category from "./pages/Category";
 import NotFound from "./pages/NotFound";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
@@ -75,12 +74,12 @@ root.render(
                   <Route path="/" element={<Home />} />
                   <Route
                     path="/categories/:categoryId"
-                    element={<CategoryTab />}
+                    element={<Category />}
                   />
-                  <Route path="/admin" element={<AdminHome />} />
+                  <Route path="/admin" element={<Home />} />
                   <Route
                     path="/admin/categories/:categoryId"
-                    element={<CategoryTab />}
+                    element={<Category />}
                   />
                 </Route>
                 <Route path="/admin/sign-in" element={<SignIn />} />
