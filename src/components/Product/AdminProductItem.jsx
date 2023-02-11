@@ -11,7 +11,7 @@ import {
 import styled from "@emotion/styled";
 import { useState } from "react";
 
-import usePutProduct from "../../hooks/mutation/product/usePutProduct";
+import usePatchProduct from "../../hooks/mutation/product/usePatchProduct";
 import useDeleteProduct from "../../hooks/mutation/product/useDeleteProduct";
 
 const AdminProductItem = ({
@@ -26,7 +26,7 @@ const AdminProductItem = ({
   const [isEdit, setIsEdit] = useState(false);
   const [editDescription, setEditDescription] = useState("");
   const offEditHandler = () => setIsEdit(false);
-  const { mutate: putMutate } = usePutProduct(offEditHandler);
+  const { mutate: patchMutate } = usePatchProduct(offEditHandler);
   const { mutate: deleteMutate } = useDeleteProduct();
 
   return (
@@ -77,7 +77,7 @@ const AdminProductItem = ({
             </Button>
             <Button
               onClick={() =>
-                putMutate({ id: productId, description: editDescription })
+                patchMutate({ id: productId, description: editDescription })
               }
               sx={{ minWidth: "50px" }}
               size="small"

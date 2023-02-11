@@ -18,7 +18,6 @@ const Header = () => {
   const logoutHandler = () => {
     navigate("/admin/sign-in", { replace: true });
     deleteCookie("token");
-    deleteCookie("refreshToken");
     deleteCookie("username");
   };
 

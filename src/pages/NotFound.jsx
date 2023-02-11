@@ -21,7 +21,7 @@ const NotFound = () => {
         variant="contained"
         onClick={() => navigate("/", { replace: true })}
       >
-        되돌아가기
+        홈으로 되돌아가기
       </Button>
     </NotFoundLayout>
   );
@@ -42,9 +42,3 @@ const NotFoundLayout = styled("div")(() => ({
 }));
 
 export default NotFound;
-
-// h2 {
-//   font-size: ${({ theme }) => theme.fontSize["20"]};
-//   font-weight: ${({ theme }) => theme.fontWeight.extraBold};
-//   margin: 30px 0px;
-// }

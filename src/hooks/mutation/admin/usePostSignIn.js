@@ -9,19 +9,10 @@ const usePostSignIn = (navigate) => {
     onError: () => toast.error("로그인에 실패했습니다."),
     onSuccess: (data) => {
       const {
-        data: {
-          token,
-          refresh_token,
-          token_expires,
-          refresh_token_expires,
-          name,
-        },
+        data: { token, name },
       } = data;
 
-      setCookie("token", token, { expires: new Date(token_expires) });
-      setCookie("refreshToken", refresh_token, {
-        expires: new Date(refresh_token_expires),
-      });
+      setCookie("token", token);
       setCookie("username", name);
 
       navigate("/admin", { replace: true });

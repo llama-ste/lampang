@@ -7,7 +7,6 @@ export const postSignIn = (data) => {
 
 export const getCoupangItem = (url) => {
   const token = getCookie("token");
-
   return client.get(`/products/info/${url}`, {
     headers: {
       Authorization: `Bearer ${token}`,

@@ -23,7 +23,7 @@ const useGetCategories = () => {
       setCategories(res);
     },
     select: (data) => {
-      return data?.data?.categories;
+      return data.data;
     },
   });
 };

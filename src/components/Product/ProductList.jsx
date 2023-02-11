@@ -5,8 +5,6 @@ import {
   MenuItem,
   Select,
   styled,
-  ToggleButton,
-  ToggleButtonGroup,
 } from "@mui/material";
 import { useRef } from "react";
 import { useParams, useNavigate, useLocation } from "react-router-dom";
@@ -53,29 +51,19 @@ const ProductList = () => {
           >
             <InputLabel>정렬</InputLabel>
             <Select value={sort} onChange={sortChange} label="정렬">
-              <MenuItem value="latest">최신순</MenuItem>
-              <MenuItem value="highest_price">높은가격순</MenuItem>
-              <MenuItem value="lowest_price">낮은가격순</MenuItem>
+              <MenuItem value="idDesc">최신순</MenuItem>
+              <MenuItem value="highestPrice">높은가격순</MenuItem>
+              <MenuItem value="lowestPrice">낮은가격순</MenuItem>
             </Select>
           </FormControl>
-          {isAdminPage && (
-            <Button
-              onClick={() => navigate("/admin/new-product")}
-              sx={{ fontWeight: 600, height: "40px" }}
-              variant="contained"
-              size="small"
-            >
-              상품추가
-            </Button>
-          )}
         </ButtonWrapper>
         <Container>
           {products.map((product) =>
             isAdminPage ? (
               <AdminProductItem
-                affiliateUrl={product["affiliate_url"]}
+                affiliateUrl={product.affiliateUrl}
                 key={product.id}
-                image={product["image_url"]}
+                image={product.imageUrl}
                 title={product.name}
                 price={product.price}
                 description={product.description}
@@ -83,9 +71,9 @@ const ProductList = () => {
               />
             ) : (
               <ProductItem
-                affiliateUrl={product["affiliate_url"]}
+                affiliateUrl={product.affiliateUrl}
                 key={product.id}
-                image={product["image_url"]}
+                image={product.imageUrl}
                 title={product.name}
                 price={product.price}
                 description={product.description}
@@ -118,20 +106,3 @@ const ButtonWrapper = styled("div")(() => ({
 }));
 
 export default ProductList;
-
-// const sortChange = (_, newValue) => {
-//   setSort(newValue);
-// };
-
-//  <ToggleButtonGroup
-//       sx={{ maxWidth: "300px", height: "40px" }}
-//       fullWidth
-//       exclusive
-//       color="primary"
-//       value={sort}
-//       onChange={sortChange}
-//     >
-//       <ToggleButton value="latest">최신순</ToggleButton>
-//       <ToggleButton value="highest_price">높은가격순</ToggleButton>
-//       <ToggleButton value="lowest_price">낮은가격순</ToggleButton>
-//  </ToggleButtonGroup>

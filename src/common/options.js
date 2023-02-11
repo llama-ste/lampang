@@ -1,5 +1,6 @@
 export const sortOptions = {
-  latest: "latest",
-  highest_price: "highest_price",
-  lowest_price: "lowest_price",
+  highestPrice: "highestPrice",
+  lowestPrice: "lowestPrice",
+  idDesc: "idDesc",
+  idASC: "idAsc",
 };

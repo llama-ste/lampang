@@ -26,8 +26,8 @@ import { toast } from "react-toastify";
 import { sortState } from "../../state/sort";
 import { adminCategoriesState } from "../../state/categories";
 import useGetCategories from "../../hooks/query/category/useGetCategories";
-import usePutReorderCategories from "../../hooks/mutation/category/usePutReorderCategories";
-import usePutCategory from "../../hooks/mutation/category/usePutCategory";
+import usePatchReorderCategories from "../../hooks/mutation/category/usePatchReorderCategories";
+import usePatchCategory from "../../hooks/mutation/category/usePatchCategory";
 import useDeleteCategory from "../../hooks/mutation/category/useDeleteCategory";
 import usePostCategory from "../../hooks/mutation/category/usePostCategory";
 import StrictModeDroppable from "../Admin/StrictModeDroppable";
@@ -46,8 +46,8 @@ const AdminNav = () => {
   const [adminCategories, setAdminCategories] =
     useRecoilState(adminCategoriesState);
   const { data, isLoading } = useGetCategories();
-  const { mutate: reorderMutate } = usePutReorderCategories();
-  const { mutate: putMutate } = usePutCategory();
+  const { mutate: reorderPatchMutate } = usePatchReorderCategories();
+  const { mutate: categortPatchMutate } = usePatchCategory();
   const { mutate: deleteMutate } = useDeleteCategory();
   const { mutate: postMutate } = usePostCategory();
   const isNotEditing = !editMode.isReorder && !editMode.isEdit;
@@ -61,7 +61,7 @@ const AdminNav = () => {
 
     const orderList = items.map((item) => item.id);
     setAdminCategories(items);
-    reorderMutate(orderList);
+    reorderPatchMutate(orderList);
   };
 
   return (
@@ -84,15 +84,6 @@ const AdminNav = () => {
       </Toolbar>
       {!isLoading && (
         <List>
-          {/* <Typography
-            sx={{
-              fontWeight: "bold",
-              fontSize: "24px",
-              margin: "0px 0px 5px 24px",
-            }}
-          >
-            카테고리
-          </Typography> */}
           {!editMode.onEditMode ? (
             data.map((category) => (
               <StyledListItemButton
@@ -173,7 +164,6 @@ const AdminNav = () => {
                             const updatedItem = {
                               ...p[i],
                               isEditItem: false,
-                              name: editCategory,
                             };
 
                             const temp = [...p];
@@ -182,7 +172,10 @@ const AdminNav = () => {
                             return temp;
                           });
                           setEditMode((p) => ({ ...p, isEdit: false }));
-                          putMutate({ id: category.id, name: editCategory });
+                          categortPatchMutate({
+                            id: category.id,
+                            name: editCategory,
+                          });
                         }}
                       >
                         <CheckIcon />
@@ -264,7 +257,7 @@ const AdminNav = () => {
               sx={{
                 fontWeight: "bold",
                 fontSize: "20px",
-                marginTop: "30px",
+                marginTop: "20px",
               }}
             >
               카테고리 추가
@@ -277,8 +270,8 @@ const AdminNav = () => {
                       toast.warning("빈값은 추가할 수 없습니다.");
                       return;
                     }
-                    setNewCategory("");
                     postMutate({ name: newCategory });
+                    setNewCategory("");
                   }}
                   sx={{ padding: "6.75px 0px" }}
                   variant="outlined"
@@ -299,7 +292,7 @@ const AdminNav = () => {
         )}
         {isNotEditing && (
           <StyledButton
-            sx={{ marginTop: "30px" }}
+            sx={{ margin: "20px 0px" }}
             variant="contained"
             onClick={() =>
               setEditMode((p) => ({ ...p, onEditMode: !p.onEditMode }))
@@ -307,6 +300,14 @@ const AdminNav = () => {
           >
             {editMode.onEditMode ? "관리완료" : "카테고리 관리"}
           </StyledButton>
+        )}
+        {!editMode.onEditMode && isNotEditing && (
+          <Button
+            onClick={() => navigate("/admin/new-product")}
+            variant="contained"
+          >
+            상품추가
+          </Button>
         )}
       </ButtonBox>
     </NavWrapper>

@@ -16,8 +16,8 @@ const useGetProducts = (sort = "latest", categoryId = null) => {
     },
     {
       getNextPageParam: (lastPage) => {
-        if (!lastPage.data.pagination.is_last_page)
-          return lastPage.data.pagination.next_page;
+        if (!lastPage.data.pagination.isLastPage)
+          return lastPage.data.pagination.nextPage;
         return false;
       },
       cacheTime: 0,

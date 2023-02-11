@@ -1,5 +1,4 @@
 import {
-  Card,
   CardActionArea,
   CardContent,
   CardMedia,
@@ -21,7 +20,7 @@ const ProductItem = ({ image, title, price, description, affiliateUrl }) => {
         }}
       >
         <CustomCardMedia component="img" image={image} alt="상품사진" />
-        <CardContent>
+        <CardContent sx={{ width: "100%" }}>
           <Typography sx={{ fontWeight: "bold" }}>{title}</Typography>
           <Typography
             sx={{
@@ -50,9 +49,10 @@ const CustomCard = styled("div")(({ theme }) => ({
 const CustomCardMedia = styled(CardMedia)(({ theme }) => ({
   objectFit: "contain",
   padding: "1px",
-  width: "100%",
+  minWidth: "260px",
   [theme.breakpoints.down("sm")]: {
     minWidth: "150px",
+    width: "100%",
   },
 }));
 

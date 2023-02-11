@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { useNavigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import { useForm, Controller } from "react-hook-form";
 import {
   Button,
@@ -18,6 +18,7 @@ import { toast } from "react-toastify";
 import { getCoupangItem } from "../api/admin";
 import usePostProduct from "../hooks/mutation/product/usePostProduct";
 import useGetCategories from "../hooks/query/category/useGetCategories";
+import { getCookie } from "../common/cookie";
 
 const NewProduct = () => {
   const navigate = useNavigate();
@@ -25,8 +26,16 @@ const NewProduct = () => {
   const { data } = useGetCategories();
   const [coupangItem, setCoupangItem] = useState({});
   const isEmpty = Object.keys(coupangItem).length === 0;
-
   const { handleSubmit, control, reset } = useForm({ mode: "onChange" });
+
+  const hasToken = !!getCookie("token");
+
+  if (!hasToken) {
+    toast.dismiss();
+    toast.clearWaitingQueue();
+    toast.error("로그인을 먼저 해주세요.");
+    return <Navigate to="/admin/sign-in" replace={true} />;
+  }
 
   const submitHandler = async ({
     coupangUrl,
@@ -42,6 +51,7 @@ const NewProduct = () => {
         reset((values) => ({
           ...values,
           coupangUrl: "",
+          affiliateUrl: data.affiliateUrl,
           productName: data.name,
         }));
       } catch (err) {
@@ -53,8 +63,8 @@ const NewProduct = () => {
 
     productMutate({
       ...coupangItem,
-      category_id: categoryId,
-      affiliate_url: affiliateUrl,
+      categoryId,
+      affiliateUrl,
       description,
       name: productName,
     });
@@ -104,7 +114,7 @@ const NewProduct = () => {
                   marginBottom: "10px",
                   borderRadius: "4px",
                 }}
-                src={coupangItem.image_url}
+                src={coupangItem.imageUrl}
                 alt="itemImage"
               />
               <ImageListItemBar

@@ -8,9 +8,11 @@ const useDeleteProduct = () => {
 
   return useMutation((id) => deleteProduct(id), {
     onError: () => toast.error("삭제에 실패했습니다."),
-    onSuccess: () => {
+    onSuccess: async () => {
+      await queryClient.invalidateQueries(["useGetProducts"]);
+      toast.dismiss();
+      toast.clearWaitingQueue();
       toast.success("삭제되었습니다.");
-      queryClient.invalidateQueries(["useGetProducts"]);
     },
   });
 };
