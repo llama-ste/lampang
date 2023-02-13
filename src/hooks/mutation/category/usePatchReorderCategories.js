@@ -8,7 +8,7 @@ const usePatchReorderCategories = () => {
   const showToast = useToastMessage();
 
   return useMutation((ids) => patchReorderCategories(ids), {
-    onError: () => showToast("error", "변경에 실패했습니다."),
+    onError: (err) => showToast("error", "변경에 실패했습니다.", err),
     onSuccess: async () => {
       await queryClient.invalidateQueries(["useGetCategories"]);
       showToast("success", "변경 되었습니다.");

@@ -7,7 +7,7 @@ const usePostProduct = (navigate) => {
   const showToast = useToastMessage();
 
   return useMutation((data) => postProduct(data), {
-    onError: () => showToast("error", "등록에 실패했습니다."),
+    onError: (err) => showToast("error", "등록에 실패했습니다.", err),
     onSuccess: () => {
       showToast("success", "등록되었습니다.");
       navigate("/admin", { replace: true });

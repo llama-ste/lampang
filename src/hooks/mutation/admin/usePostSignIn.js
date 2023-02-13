@@ -8,7 +8,7 @@ const usePostSignIn = (navigate) => {
   const showToast = useToastMessage();
 
   return useMutation((data) => postSignIn(data), {
-    onError: () => showToast("error", "로그인에 실패했습니다."),
+    onError: (err) => showToast("error", "로그인에 실패했습니다.", err),
     onSuccess: (data) => {
       const {
         data: { token, name },

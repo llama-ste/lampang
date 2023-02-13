@@ -8,7 +8,7 @@ const usePatchCategory = () => {
   const showToast = useToastMessage();
 
   return useMutation((params) => patchCategory(params), {
-    onError: () => showToast("error", "수정에 실패했습니다."),
+    onError: (err) => showToast("error", "수정에 실패했습니다.", err),
     onSuccess: async () => {
       await queryClient.invalidateQueries(["useGetCategories"]);
       showToast("success", "수정되었습니다.");

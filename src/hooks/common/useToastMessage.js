@@ -7,7 +7,8 @@ const useToastMessage = () => {
     warning: (message) => toast.warning(message),
   };
 
-  const showToast = (type, message) => {
+  const showToast = (type, message, err = null) => {
+    if (err && err.response.status === 401) return;
     toast.dismiss();
     toast.clearWaitingQueue();
     toastType[type](message);

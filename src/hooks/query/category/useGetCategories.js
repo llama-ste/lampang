@@ -14,7 +14,8 @@ const useGetCategories = () => {
   const showToast = useToastMessage();
 
   return useQuery(["useGetCategories"], getCategories, {
-    onError: () => showToast("error", "카테고리 가져오기에 실패했습니다."),
+    onError: (err) =>
+      showToast("error", "카테고리 가져오기에 실패했습니다.", err),
     onSuccess: (data) => {
       const res = Object.fromEntries(
         data.map((category) => [category.id, category.name])

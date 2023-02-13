@@ -8,7 +8,7 @@ const usePatchProduct = (offEditHandler) => {
   const showToast = useToastMessage();
 
   return useMutation((params) => patchProduct(params), {
-    onError: () => showToast("error", "수정에 실패했습니다."),
+    onError: (err) => showToast("error", "수정에 실패했습니다.", err),
     onSuccess: async () => {
       await queryClient.invalidateQueries(["useGetProducts"]);
       offEditHandler();
