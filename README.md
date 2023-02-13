@@ -17,8 +17,8 @@
 
 ## Tech Stack
 <b>Frontend(My Role)</b> : React, Recoil, React-query, React-beautiful-dnd, Mui <br/>
-<b>Backend</b> : RubyOnRails, PostgreSQL, Nokogiri <br/>
-<b>Infrastructure</b> : Vercel, Railway
+<b>Backend</b> : Express, PostgreSQL, Sequelize, Passport, Cheerio <br/>
+<b>Infrastructure</b> : Vercel
 
 <br/>
 
