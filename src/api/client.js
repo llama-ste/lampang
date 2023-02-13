@@ -1,5 +1,7 @@
 import axios from "axios";
 import { deleteCookie, getCookie } from "../common/cookie";
+import { toast } from "react-toastify";
+import customHistory from "../router/customHistory";
 
 const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
 
@@ -24,11 +26,13 @@ client.interceptors.request.use(
 client.interceptors.response.use(
   (res) => res,
   (err) => {
-    if (err.response.data.error_code === 40101) {
+    if (err.response.status === 401) {
       deleteCookie("token");
       deleteCookie("username");
-      alert("로그인을 다시 해주세요.");
-      window.location.href = "https://llamaste.site/admin/sign-in";
+      toast.dismiss();
+      toast.clearWaitingQueue();
+      toast.error("로그인을 다시 해주세요.");
+      customHistory.replace("/admin/sign-in");
     }
 
     return Promise.reject(err);

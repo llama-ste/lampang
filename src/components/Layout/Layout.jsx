@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { useLocation } from "react-router-dom";
+import { Outlet, useLocation } from "react-router-dom";
 
 import Nav from "./Nav";
 import Header from "./Header";
@@ -7,9 +7,8 @@ import AdminNav from "./AdminNav";
 import ScrollToTop from "../Common/ScrollToTop";
 import MobileTabs from "../Mobile/MobileTabs";
 
-const Layout = ({ children }) => {
+const Layout = () => {
   const { pathname } = useLocation();
-
   const isAdminHome = pathname.includes("admin");
 
   return (
@@ -18,7 +17,7 @@ const Layout = ({ children }) => {
         <Header />
         <Main>
           <MobileTabs />
-          {children}
+          <Outlet />
         </Main>
         <NavWrapper>{isAdminHome ? <AdminNav /> : <Nav />}</NavWrapper>
       </GridContainer>

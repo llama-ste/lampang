@@ -87,7 +87,6 @@ const Container = styled("div")(({ theme }) => ({
   gap: "10px",
   padding: "1px",
   width: "100%",
-  minHeight: "100vh",
   [theme.breakpoints.up("sm")]: {
     gridTemplateColumns: "repeat(3, 1fr)",
     gap: "15px",

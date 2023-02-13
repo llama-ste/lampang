@@ -56,7 +56,6 @@ const MobileTabsBox = styled(Box)(({ theme }) => ({
   marginBottom: "20px",
   [theme.breakpoints.up("md")]: {
     display: "none",
-    width: "100%",
   },
   [theme.breakpoints.down("sm")]: {
     minWidth: "0px",
