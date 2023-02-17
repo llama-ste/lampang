@@ -28,7 +28,7 @@ const Header = () => {
           <div style={{ display: "flex", alignItems: "center" }}>
             <h1>
               {params?.categoryId
-                ? `${categories[params.categoryId]}  `
+                ? `${categories[params.categoryId] ?? "Lampang"}  `
                 : isAdminPage
                 ? "Lampang Admin  "
                 : "Lampang  "}
