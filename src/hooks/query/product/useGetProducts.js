@@ -1,7 +1,7 @@
 import { useInfiniteQuery } from "@tanstack/react-query";
 import { getCategoryInProducts, getProducts } from "../../../api/product";
 
-const useGetProducts = (sort = "latest", categoryId = null) => {
+const useGetProducts = (sort = "idDesc", categoryId = null) => {
   return useInfiniteQuery(
     ["useGetProducts", sort, categoryId],
     ({ pageParam = 1 }) => {
