@@ -60,9 +60,12 @@ const Nav = () => {
 
 const NavWrapper = styled("nav")(({ theme }) => ({
   position: "fixed",
+  top: 0,
+  bottom: 0,
   width: "300px",
-  minHeight: "100vh",
   background: "#fff",
+  overflowY: "scroll",
+  overflowX: "hidden",
 }));
 
 const StyledListItemButton = styled(ListItemButton)(({ theme }) => ({
