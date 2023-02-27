@@ -21,7 +21,7 @@ const Nav = () => {
 
   return (
     <NavWrapper>
-      <Toolbar sx={{ margin: "15px 0px" }}>
+      <Toolbar sx={{ margin: "15px 0px", position: "fixed", top: 0 }}>
         <StyledTypography
           onClick={() => {
             resetSort();
@@ -62,6 +62,7 @@ const NavWrapper = styled("nav")(({ theme }) => ({
   position: "fixed",
   top: 0,
   bottom: 0,
+  marginTop: "90px",
   width: "300px",
   background: "#fff",
   overflowY: "scroll",
