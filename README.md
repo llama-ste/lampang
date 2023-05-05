@@ -1,8 +1,9 @@
 # [Lampang](https://llamaste.site)
-<b>람팡은 쿠팡 파트너스* 기반의 어필리에이트 웹서비스 입니다.</b><br/>
+
+<b>람팡은 쿠팡 파트너스\* 기반의 어필리에이트 웹서비스 입니다.</b><br/>
 <b>※ 유저가 람팡을 통해 쿠팡의 상품을 구매하면 람팡은 상품 금액의 약 3~10%의 수수료를 정산 받을 수 있어요.</b>
 
-*쿠팡 파트너스 : 쿠팡에서 운영하는 온라인 제휴마케팅 서비스이며 홈페이지, 블로그, SNS 등을 사용하는 사람이라면 누구나 이용할 수 있어요. 쿠팡에서 판매되는 상품을 자신의 페이지에 노출하여 구매가 발생하면 광고비를 지급받을 수 있어요.
+\*쿠팡 파트너스 : 쿠팡에서 운영하는 온라인 제휴마케팅 서비스이며 홈페이지, 블로그, SNS 등을 사용하는 사람이라면 누구나 이용할 수 있어요. 쿠팡에서 판매되는 상품을 자신의 페이지에 노출하여 구매가 발생하면 광고비를 지급받을 수 있어요.
 
 <p align="center">
 <img src="https://user-images.githubusercontent.com/90495580/205214487-7b5db9c2-4c69-46ad-9248-d70c6dfeb42c.png" />
@@ -15,11 +16,13 @@
 <br/>
 
 ## Userflow
+
 <img src="https://user-images.githubusercontent.com/90495580/205214864-6d50b4ba-7ac7-4e68-8338-7b2f08a2d5f3.png"/>
 
 <br/>
 
 ## Tech Stack
+
 <b>Frontend</b> : React, Recoil, React-query, React-beautiful-dnd, Mui <br/>
 <b>Backend</b> : Express, PostgreSQL(supabase), Sequelize, Passport, Cheerio <br/>
 <b>Infrastructure</b> : Vercel
@@ -27,7 +30,9 @@
 <br/>
 
 ## Remarkable
+
 ### Infinite Scroll (Intersection Observer + React-query)
+
 <b>Intersection Observer</b> <br/>
 초기에 scroll event에 throttle를 이용해 무한스크롤을 만들었는데, 300ms마다 불필요한 이벤트를 호출한다는 생각이 들었다.<br/>
 이러한 문제를 좀더 세련되게 만들 방법이 없나 찾아보던 중 intersection observer를 알게 되었다. <br/>
@@ -41,7 +46,6 @@ API의 파라미터 값만 변경하여 아주 간단하게 동일한 API를 계
 Intersection Observer와 찰떡궁합이라 선택하게 되었다. <br/>
 _🚨 cacheTime을 변경하지 않으면 캐시된 시간동안 다른페이지를 다녀올 경우 그전에 받아온 모든 페이지를 다시 fetch하는것에 유의해야한다._
 
-
 <br/>
 
 <b>Custom Hook</b><br/>
@@ -49,17 +53,17 @@ _🚨 cacheTime을 변경하지 않으면 캐시된 시간동안 다른페이지
 
 <details>
 <summary><b>Intersection Observer Custom Hook Code</b></summary>
-<div markdown="1">    
+<div markdown="1">
 
 ```javascript
-import { useEffect } from "react";
+import { useEffect } from 'react';
 
 const useIntersectionObserver = ({
   root,
   target,
   onIntersect,
   threshold = 1.0,
-  rootMargin = "0px",
+  rootMargin = '0px',
   enabled = true,
 }) => {
   useEffect(() => {
@@ -95,6 +99,7 @@ export default useIntersectionObserver;
 <br/>
 
 ### Draggable List
+
 <b>문제</b><br/>
 React-beautiful-dnd를 이용하여 Draggable List를 구현하였는데, React18버전에서 애니메이션이 동작하지 않는 문제가 발생했다.<br/>
 
@@ -108,14 +113,13 @@ React18버전에서 StrictMode일 경우 useLayoutEffect내에서 React-beautifu
 requestAnimationFrame는 다음 리페인트 과정이 시작되기전 원하는 애니메이트를 만들어줄 콜백이 실행되는 API인데, 이 문제에 이용한 결과 정상동작 하였다.<br/>
 <b>Link : [Github Issue](https://github.com/atlassian/react-beautiful-dnd/issues/2399)</b>
 
-
 <details>
 <summary><b>StrictMode Droppable Code</b></summary>
 <div markdown="1">
 
 ```javascript
-import { useEffect, useState } from "react";
-import { Droppable, DroppableProps } from "react-beautiful-dnd";
+import { useEffect, useState } from 'react';
+import { Droppable, DroppableProps } from 'react-beautiful-dnd';
 
 const StrictModeDroppable = ({ children, ...props }: DroppableProps) => {
   const [enabled, setEnabled] = useState(false);
@@ -137,7 +141,6 @@ const StrictModeDroppable = ({ children, ...props }: DroppableProps) => {
 };
 
 export default StrictModeDroppable;
-
 ```
 
 </div>
@@ -150,11 +153,13 @@ export default StrictModeDroppable;
 <br/>
 
 ### Responsive Web
+
 <img src="https://user-images.githubusercontent.com/90495580/205828053-a7aca10f-8d5d-438f-af95-a8b7bdae9e73.png" />
 
 <br/>
 
 ### 쿠팡 API 연동
+
 <p align="center">
 <img src="https://user-images.githubusercontent.com/90495580/205235323-8de4e946-fd62-4af5-a049-2479e7b6f6af.png" />
 </p>
@@ -164,14 +169,17 @@ export default StrictModeDroppable;
 <br/>
 
 ### 월별 수익
+
 <img src="https://user-images.githubusercontent.com/90495580/219869119-d7f89e6b-9e27-4988-9bfb-cf16ed7866e5.png" />
 
 <br/>
 
 ### 실적 리포트
+
 <img src="https://user-images.githubusercontent.com/90495580/219851906-23578c32-225b-43c8-94ee-ba1a3cc7054a.png" />
 
 <br/>
 
 ## 📌한 줄 회고
+
 > 조그마한 수익이라도 낼 수 있는 프로젝트를 만들어보니 개발이 점점 더 흥미롭게 다가오는것 같다.
